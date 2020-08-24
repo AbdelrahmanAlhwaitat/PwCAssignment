@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "AdminReg";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head
+{
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Icons font CSS-->
+    <link href="~/Content/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="~/Content/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    <!-- Jquery JS-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="~/Content/vendor/select2/select2.min.js"></script>
+    <script src="~/Content/vendor/datepicker/moment.min.js"></script>
+    <script src="~/Content/vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="~/Scripts/global.js"></script>
+    <!-- Main CSS-->
+    <link href="~/Content/main.css" rel="stylesheet" media="all">
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#btnRegister').click(function () {
+                var User = new Object();
+                User.firstName = $('#txtFirstName').val();
+                User.lastName = $('#txtLastName').val();
+                User.dob = $('#txtDOB').val();
+                User.userName = $('#txtUserName').val();
+                User.password = $('#txtPassword').val();
+                User.passwordchecker = $('#txtConfirmPassword').val();
+                User.email = $('#txtemail').val();
+                if ($('input[name="radioGender"]:checked').val() == 'Male') {
+                    User.gender = 1;
+                }
+                if ($('input[name="radioGender"]:checked').val() == 'Female') {
+                    User.gender = 2;
+                }
+                debugger;
+                $.post('/WebAPI/api/UserWepAPI/PostInsertAdmin', User, function () {
+                    alert('The user information was send successfully');
+                });
+            });
+        })
+    </script>
+}
+
+<body>
+    <div class="page-wrapper p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Admin Registration</h2>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">first name</label>
+                                <input class="input--style-4" type="text" id="txtFirstName">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">last name</label>
+                                <input class="input--style-4" type="text" id="txtLastName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Birthday</label>
+                                <div class="input-group-icon">
+                                    <input class="input--style-4 js-datepicker" type="date" id="txtDOB">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">User Name</label>
+                                <input class="input--style-4" type="text" id="txtUserName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Password</label>
+                                <input class="input--style-4" type="password" id="txtPassword">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Confirm password</label>
+                                <input class="input--style-4" type="password" id="txtConfirmPassword">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Gender</label>
+                                <div class="p-t-10">
+                                    <label class="radio-container m-r-45">
+                                        Male
+                                        <input type="radio" checked="checked" name="radioGender" value="Male">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="radio-container">
+                                        Female
+                                        <input type="radio" name="radioGender" value="Female">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Email</label>
+                                <input class="input--style-4" type="email" id="txtemail">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-t-15">
+                        <button class="btn btn--radius-2 btn--blue" type="button" id="btnRegister">Register</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
